@@ -1,9 +1,14 @@
 #include "nmea.h"
 
 NMEA_Status_t NMEA_ParseLine(const char* line, GpsData_t* data){
+    (void)line;
+    (void)data;
     return NMEA_ERR_UNSUPPORTED;
 }
 
 uint8_t NMEA_Checksum(const char* line){
+    (void)line;
     return 0;
 }
+
+
