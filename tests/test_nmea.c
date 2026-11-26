@@ -3,7 +3,7 @@
 #include "nmea.h"
 
 
-bool compare_nmea(const char *line, int8_t got, int8_t expect){
+bool compare_nmea(const char *name, uint8_t got, uint8_t expect){
  if(got == expect){
     printf("PASS: %s\n",line);
     return 0;
@@ -13,10 +13,10 @@ bool compare_nmea(const char *line, int8_t got, int8_t expect){
  }
 }
 
-int main() {
-    int8_t failed = 0;
+int main(void) {
+    int   failed = 0;
     const char * gga_line = "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47";
-    const char * rmc_line = "GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A";
+    const char * rmc_line = "$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A";
 
     failed += compare_nmea("NMEA_Checksum_gga",NMEA_Checksum(gga_line),0x47);
     failed += compare_nmea("NMEA_Checksum_rmc",NMEA_Checksum(rmc_line),0x6A);

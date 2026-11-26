@@ -7,7 +7,7 @@ NMEA_Status_t NMEA_ParseLine(const char* line, GpsData_t* data){
 }
 
 uint8_t NMEA_Checksum(const char* line){
-    (void)line;
+    
     return 0;
 }
 
