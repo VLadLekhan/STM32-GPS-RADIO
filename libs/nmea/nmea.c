@@ -1,8 +1,26 @@
 #include "nmea.h"
+#include <string.h>
 
 NMEA_Status_t NMEA_ParseLine(const char* line, GpsData_t* data){
-    (void)line;
+    if(line[0] != '$'){
+        return NMEA_ERR_FORMAT;
+    }
+
+    const char* star = strchr(line, '*');
+    if (star == NULL){
+        return NMEA_ERR_FORMAT;
+    }
+
+    if(star[1] == '\0'){
+        return NMEA_ERR_FORMAT;
+    }
+
+    if(star[2] == '\0'){
+        return NMEA_ERR_FORMAT;
+    }
+
     (void)data;
+ 
     return NMEA_ERR_UNSUPPORTED;
 }
 

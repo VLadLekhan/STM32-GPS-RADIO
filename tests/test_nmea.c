@@ -42,9 +42,9 @@ int main(void) {
 
     failed +=compare_status("NMEA_ParseLine_gga",NMEA_ParseLine(gga_line,&test_data),NMEA_OK);
     failed +=compare_status("NMEA_ParseLine_rmc",NMEA_ParseLine(rmc_line,&test_data),NMEA_OK);
-    failed +=compare_status("NMEA_ParseLine_gga_bad_sum",NMEA_ParseLine(gga_line_bad_sum,&test_data),NMEA_OK);
-    failed +=compare_status("NMEA_ParseLine_gga_no_$",NMEA_ParseLine(gga_line_no_dollar,&test_data),NMEA_OK);
-    failed +=compare_status("NMEA_ParseLine_gga_no_star",NMEA_ParseLine(gga_line_no_star,&test_data),NMEA_OK);
+    failed +=compare_status("NMEA_ParseLine_gga_bad_sum",NMEA_ParseLine(gga_line_bad_sum,&test_data),NMEA_ERR_CHECKSUM);
+    failed +=compare_status("NMEA_ParseLine_gga_no_$",NMEA_ParseLine(gga_line_no_dollar,&test_data),NMEA_ERR_FORMAT);
+    failed +=compare_status("NMEA_ParseLine_gga_no_star",NMEA_ParseLine(gga_line_no_star,&test_data),NMEA_ERR_FORMAT);
     
     return failed;
 }
