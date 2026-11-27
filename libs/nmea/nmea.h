@@ -31,7 +31,7 @@ typedef enum {
 
 
 NMEA_Status_t NMEA_ParseLine(const char* line, GpsData_t* data);
-uint8_t NMEA_Checksum(const char* line);
+uint8_t NMEA_Checksum(const char* line);                            //line not NULL and start with '$'
 
 
 #endif /*NMEA_H*/
