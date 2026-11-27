@@ -46,9 +46,17 @@ NMEA_Status_t NMEA_ParseLine(const char* line, GpsData_t* data){
         return NMEA_ERR_CHECKSUM;
     }
 
+    const char* comma = strchr(line, ',');
+    if(comma == NULL) return NMEA_ERR_FORMAT;
+    if(comma - line != 6) return NMEA_ERR_FORMAT;
+
+    int gga_comparison = strncmp(comma - 3, "GGA", 3);
+    int rmc_comparison = strncmp(comma - 3, "RMC", 3);
+    if(rmc_comparison != 0 && gga_comparison != 0) return NMEA_ERR_UNSUPPORTED;
+
     (void)data;
  
-    return NMEA_ERR_UNSUPPORTED;
+    return NMEA_OK;
 }
 
 uint8_t NMEA_Checksum(const char* line){

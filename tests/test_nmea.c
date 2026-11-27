@@ -34,6 +34,7 @@ int main(void) {
     const char* gga_line_no_dollar = "GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47";
     const char* gga_line_no_star = "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,47";
     const char* gga_line_bad_sum_with_G = "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*4G";
+    const char* gsv_line = "$GPGSV,1*48";
     GpsData_t test_data = {0};
 
     failed += compare_nmea("NMEA_Checksum_gga",NMEA_Checksum(gga_line),0x47);
@@ -47,6 +48,8 @@ int main(void) {
     failed +=compare_status("NMEA_ParseLine_gga_no_$",NMEA_ParseLine(gga_line_no_dollar,&test_data),NMEA_ERR_FORMAT);
     failed +=compare_status("NMEA_ParseLine_gga_no_star",NMEA_ParseLine(gga_line_no_star,&test_data),NMEA_ERR_FORMAT);
     failed +=compare_status("NMEA_ParseLine_gga_line_bad_sum_with_G",NMEA_ParseLine(gga_line_bad_sum_with_G,&test_data),NMEA_ERR_FORMAT);
+    failed +=compare_status("NMEA_ParseLine_gsv_line",NMEA_ParseLine(gsv_line,&test_data),NMEA_ERR_UNSUPPORTED);
+
 
     return failed;
 }
